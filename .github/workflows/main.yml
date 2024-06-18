@@ -39,6 +39,13 @@ jobs:
           file_glob: true
           prerelease: ${{ github.event_name != 'release' }}
           overwrite: true
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          name: build-artifacts
+          path: build/*/*.zip
+          
 
   analyse-clang:
     name: Analyse Clang
